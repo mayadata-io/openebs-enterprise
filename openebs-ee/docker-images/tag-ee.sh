@@ -4,7 +4,7 @@
 # enterprise container image registry
 
 COMMUNITY_REG="quay.io/openebs/"
-ENTERPRISE_REG="mayadata-io/"
+ENTERPRISE_REG="mayadataio/"
 
 usage()
 {
