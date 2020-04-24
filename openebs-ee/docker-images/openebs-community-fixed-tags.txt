@@ -1,0 +1,4 @@
+zfs-driver:0.6.0
+node-disk-manager-amd64:v0.4.9
+node-disk-operator-amd64:v0.4.9
+node-disk-exporter-amd64:v0.4.9
