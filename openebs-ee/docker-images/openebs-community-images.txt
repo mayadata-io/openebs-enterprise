@@ -9,6 +9,7 @@ m-exporter
 m-upgrade
 cspc-operator
 cvc-operator
+cspi-mgmt
 admission-server
 provisioner-localpv
 openebs-k8s-provisioner
