@@ -1,4 +1,8 @@
-zfs-driver:0.6.0
-node-disk-manager-amd64:v0.4.9
-node-disk-operator-amd64:v0.4.9
-node-disk-exporter-amd64:v0.4.9
+zfs-driver:0.7.0
+node-disk-manager-amd64:0.5.0
+node-disk-operator-amd64:0.5.0
+node-disk-exporter-amd64:0.5.0
+monitor-pv:0.1.0
+mayastor:0.1.0
+mayastor-grpc:0.1.0
+moac:0.1.0

@@ -18,3 +18,8 @@ snapshot-provisioner
 cstor-csi-driver
 jiva-csi
 velero-plugin
+cvc-operator-amd64
+cspc-operator-amd64
+cstor-volume-manager-amd64
+cstor-pool-manager-amd64
+cstor-webhook-amd64
