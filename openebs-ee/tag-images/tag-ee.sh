@@ -24,7 +24,7 @@ if [ ! -z $2 ]; then
   EE_SUFFIX="-ee-${2}"
 fi
 
-IMGLIST=$(cat  openebs-community-images.txt |tr "\n" " ")
+IMGLIST=$(cat openebs-release-tag-images.txt |tr "\n" " ")
 
 for IMG in $IMGLIST
 do
@@ -34,7 +34,7 @@ do
 done
 
 #Images that do not follow the openebs release version
-TIMGLIST=$(cat  openebs-community-fixed-tags.txt |tr "\n" " ")
+TIMGLIST=$(cat openebs-custom-tag-images.txt |tr "\n" " ")
 
 for TIMG in $TIMGLIST
 do
