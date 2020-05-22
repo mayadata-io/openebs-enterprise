@@ -21,7 +21,7 @@ check_ee_branch()
   ./git-get-branch openebs/${REPO} ${BRANCH}
   if [ $? -eq 0 ]; then
     if [ "$BRANCH" == "master" ] ; then
-      echo "Skipping $REPO"
+      echo "Skipping $REPO which has only master branch"
     else
       ./git-get-branch mayadata-io/${REPO} ${BRANCH}
       ./git-get-branch mayadata-io/${REPO} ${BRANCH}-ee
@@ -44,8 +44,14 @@ done
 
 #OpenEBS Release repositories with non-mainstream 
 #branching convention
-check_ee_branch linux-utils master
-check_ee_branch zfs-localpv v0.7.x
-check_ee_branch node-disk-manager v0.5.x
-check_ee_branch Mayastor master
-check_ee_branch monitor-pv master
+ALPHA_REPO_LIST=$(cat  openebs-alpha-repos.txt |tr "\n" " ")
+for REPOWITHBRANCH in $ALPHA_REPO_LIST
+do
+  ALPHAREPO=$(echo ${REPOWITHBRANCH} | cut -d ':' -f1)
+  ALPHABRANCH=$(echo ${REPOWITHBRANCH} | cut -d ':' -f2)
+  if [[ $ALPHAREPO =~ ^# ]]; then
+    echo "Skipping ${ALPHAREPO}"
+  else
+    check_ee_branch ${ALPHAREPO} ${ALPHABRANCH}
+  fi
+done

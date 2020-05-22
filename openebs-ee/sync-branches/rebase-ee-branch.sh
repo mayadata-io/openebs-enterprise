@@ -20,12 +20,12 @@ fi
 REL_BRANCH=$1
 
 
-cherrypick_rel_branch()
+rebase_rel_branch()
 {
   REPODIR="repos/$1"
   BRANCH=$2
 
-  echo "Cherry picking from $2 to $2-ee for $1"
+  echo "Rebase $2-ee from $2 for repo $1"
 
   cd $REPODIR && \
  git checkout ${BRANCH}-ee && \
@@ -35,25 +35,32 @@ cherrypick_rel_branch()
  cd ../..
 }
 
-REPO_LIST=$(cat  openebs-repos.txt |tr "\n" " ")
+REPO_LIST=$(cat openebs-repos.txt |tr "\n" " ")
 
 for REPO in $REPO_LIST
 do
   if [[ $REPO =~ ^# ]]; then
     echo "Skipping $REPO"
   else
-    cherrypick_rel_branch ${REPO} ${REL_BRANCH}
+    rebase_rel_branch ${REPO} ${REL_BRANCH}
   fi
 done
 
 #OpenEBS Release repositories with non-mainstream 
 #branching convention
-cherrypick_rel_branch node-disk-manager v0.5.x
-cherrypick_rel_branch zfs-localpv v0.7.x
-
-#The following repositories do not have release
-#branches yet. 
-#cherrypick_rel_branch linux-utils master
-#cherrypick_rel_branch monitor-pv master
-#cherrypick_rel_branch Mayastor master
+ALPHA_REPO_LIST=$(cat  openebs-alpha-repos.txt |tr "\n" " ")
+for REPOWITHBRANCH in $ALPHA_REPO_LIST
+do
+  ALPHAREPO=$(echo ${REPOWITHBRANCH} | cut -d ':' -f1)
+  ALPHABRANCH=$(echo ${REPOWITHBRANCH} | cut -d ':' -f2)
+  if [[ $ALPHAREPO =~ ^# ]]; then
+    echo "Skipping ${ALPHAREPO}"
+  else
+    if [ "$ALPHABRANCH" == "master" ] ; then
+      echo "Skipping $ALPHAREPO which has only master branch"
+    else
+      rebase_rel_branch ${ALPHAREPO} ${ALPHABRANCH}
+    fi
+  fi
+done
 

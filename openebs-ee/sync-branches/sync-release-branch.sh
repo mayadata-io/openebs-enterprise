@@ -14,6 +14,7 @@ if [ $# -ne 1 ]; then
 	usage
 fi
 
+rm -rf repos
 mkdir -p repos
 
 REL_BRANCH=$1
@@ -51,7 +52,7 @@ fetch_rel_branch()
     echo "$1 already has ${BRANCH}"
 
   else
-    echo "Syncing $1 with ${BRANCH}"
+    echo "==> Syncing $1 with ${BRANCH}"
 
     cd $REPODIR && \
  git fetch upstream ${BRANCH}:${BRANCH} && \
@@ -69,6 +70,7 @@ sync_rel_branch()
 
   fetch_rel_branch $1 $2
 
+  echo "==> Sync with upstream branch ${BRANCH}"
   cd $REPODIR && \
  git checkout ${BRANCH} && \
  git fetch upstream ${BRANCH} && \
@@ -84,6 +86,7 @@ create_ee-rel_branch()
   REPODIR="repos/$1"
   BRANCH=$2
 
+  echo "==> Create enterprise release branch"
   cd $REPODIR && \
  git checkout ${BRANCH} && \
  git branch ${BRANCH}-ee && \
@@ -119,14 +122,13 @@ check_ee_branch()
   fi
 }
 
-REPO_LIST=$(cat  openebs-repos.txt |tr "\n" " ")
+REPO_LIST=$(cat openebs-repos.txt |tr "\n" " ")
 
 for REPO in $REPO_LIST
 do
   if [[ $REPO =~ ^# ]]; then
     echo "Skipping $REPO"
   else
-    echo "Skipping $REPO"
     sync_rel_branch ${REPO} master
     check_ee_branch ${REPO} ${REL_BRANCH}
   fi
@@ -134,16 +136,22 @@ done
 
 #OpenEBS Release repositories with non-mainstream 
 #branching convention
-check_ee_branch node-disk-manager v0.5.x
-check_ee_branch zfs-localpv v0.7.x
-sync_rel_branch node-disk-manager master
-sync_rel_branch zfs-localpv master
-
-#The following repositories do not have release
-#branches yet. 
-sync_rel_branch linux-utils master
-sync_rel_branch monitor-pv master
-sync_rel_branch Mayastor master
+ALPHA_REPO_LIST=$(cat openebs-alpha-repos.txt |tr "\n" " ")
+for REPOWITHBRANCH in $ALPHA_REPO_LIST
+do
+  ALPHAREPO=$(echo ${REPOWITHBRANCH} | cut -d ':' -f1)
+  ALPHABRANCH=$(echo ${REPOWITHBRANCH} | cut -d ':' -f2)
+  if [[ $ALPHAREPO =~ ^# ]]; then
+    echo "Skipping ${ALPHAREPO}"
+  else
+    if [ "$ALPHABRANCH" == "master" ] ; then
+      sync_rel_branch ${ALPHAREPO} ${ALPHABRANCH}
+    else
+      sync_rel_branch ${ALPHAREPO} master
+      check_ee_branch ${ALPHAREPO} ${ALPHABRANCH}
+    fi
+  fi
+done
 
 #The following repositories master branch is
 #unconventional
