@@ -4,8 +4,8 @@ At a high level the process involves
 - [Update enterprise release branch with latest changes](#sync-upstream-branch)
 - [Create fix branch from enterprise release branch](#create-fix-branch)
 - [Raise PR to enterprise release branch](#test-fix)
-- [Raise PR to community release branch](#upstream fix)
-- [Pull fix from upstream to enterprise release branch](#pull-fixes-into-enterprise-branch]
+- [Raise PR to community release branch](#upstream-fix)
+- [Pull fix from upstream to enterprise release branch](#pull-fixes-into-enterprise-branch)
 
 ## Sync upstream branch
 
@@ -59,4 +59,5 @@ git push --set-upstream origin <fix-branch-name>
 
 - Follow the [steps above](#sync-upstream-branch) to pull the latest changes into enteperise please. 
 - Close the WIP (Draft) PRs by linking to the commits resolving the issue.
+- Delete the fix branch
 
