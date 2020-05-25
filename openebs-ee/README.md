@@ -43,7 +43,6 @@ Note: If this is the first time an image is pushed to mayadata docker registry, 
 Note: Some OpenEBS container images like NDM, ZFS Local PV, Mayastor are still under development and are tagged with custom versions. Prior to running the script below, they will need to be edited with appropriate release names. 
 
 ```
-# Set Docker Login and Password environment variables in your shell as DNAME and DPASS respectively.
 git clone https://github.com/mayadata-io/hacks
 cd hacks/openebs-ee/sync-branches/
 # Edit openebs-alpha-repos.txt with the correct community release branch for the alpha repos. 
@@ -58,7 +57,6 @@ cd hacks/openebs-ee/sync-branches/
 Note: Some OpenEBS container images like NDM, ZFS Local PV, Mayastor are still under development and are tagged with custom versions. Prior to running the script below, they will need to be edited with appropriate release names. 
 
 ```
-# Set Docker Login and Password environment variables in your shell as DNAME and DPASS respectively.
 git clone https://github.com/mayadata-io/hacks
 cd hacks/openebs-ee/sync-branches/
 # Edit openebs-alpha-repos.txt with the correct community release branch for the alpha repos. 
@@ -75,7 +73,6 @@ cd hacks/openebs-ee/sync-branches/
 Note: Some OpenEBS container images like NDM, ZFS Local PV, Mayastor are still under development and are tagged with custom versions. Prior to running the script below, they will need to be edited with appropriate release names. 
 
 ```
-# Set Docker Login and Password environment variables in your shell as DNAME and DPASS respectively.
 git clone https://github.com/mayadata-io/hacks
 cd hacks/openebs-ee/sync-branches/
 # Edit openebs-alpha-repos.txt with the correct community release branch for the alpha repos. 
@@ -91,7 +88,6 @@ cd hacks/openebs-ee/sync-branches/
 Prior to running this step, you have to execute run [sync-release-branches](#setup-and-sync-enterprise-release-branches).
 
 ```
-# Set Docker Login and Password environment variables in your shell as DNAME and DPASS respectively.
 git clone https://github.com/mayadata-io/hacks
 cd hacks/openebs-ee/sync-branches/
 # Edit openebs-alpha-repos.txt with the correct community release branch for the alpha repos. 

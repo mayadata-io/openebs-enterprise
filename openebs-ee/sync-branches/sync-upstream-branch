@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# This script helps to sync (rebase) 
+# enterprise release branch with community 
+# release branch.
+
+usage()
+{
+	echo "Usage: $0 <repo name> <community release branch>"
+	echo " Example: $0 maya v1.10.x"
+	exit 1
+}
+
+if [ $# -ne 2 ]; then
+	usage
+fi
+
+REPO=$1
+BRANCH=$2
+
+sync_upstream_branch()
+{
+  REPODIR="repos/$1"
+  RELBRANCH=$2
+
+  echo "==> Sync $1 with upstream branch $2"
+
+  if [[ ! -d ${REPODIR} ]]; then
+    echo "Error: $1 is not checked out"
+    exit 1
+  fi
+
+  cd $REPODIR && \
+ git checkout ${RELBRANCH} && \
+ git fetch upstream ${RELBRANCH} && \
+ git rebase upstream/${RELBRANCH} && \
+ git status && \
+ git push && \
+ cd ../..
+}
+
+sync_upstream_branch ${REPO} ${BRANCH}
+

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# This script helps to fetch the upstream
+# release branch  into forked repository
+
+usage()
+{
+	echo "Usage: $0 <repo name> <community release branch>"
+	echo " Example: $0 maya v1.10.x"
+	exit 1
+}
+
+if [ $# -ne 2 ]; then
+	usage
+fi
+
+REPO=$1
+BRANCH=$2
+
+checkout_upstream_branch()
+{
+  REPODIR="repos/$1"
+  RELBRANCH=$2
+
+  ./git-get-branch mayadata-io/${1} ${RELBRANCH}
+  if [ $? -eq 0 ]; then
+    echo "$1 already has ${RELBRANCH}"
+
+  else
+    echo "==> Fetching $1 with ${RELBRANCH}"
+
+    cd $REPODIR && \
+ git fetch upstream ${RELBRANCH}:${RELBRANCH} && \
+ git checkout ${RELBRANCH} && \
+ git push --set-upstream origin ${RELBRANCH} && \
+ cd ../..
+
+  fi
+
+}
+
+checkout_upstream_branch ${REPO} ${BRANCH}
+
