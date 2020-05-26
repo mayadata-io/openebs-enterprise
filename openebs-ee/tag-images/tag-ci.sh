@@ -8,9 +8,8 @@ ENTERPRISE_REG="mayadataio/"
 
 usage()
 {
-  echo "Usage: $0 <community version> [<rc-tag>]"
-  echo "Example: To tag 1.10.0-ee from 1.10.0, use: $0 1.10.0"
-  echo "Example: to tag 1.10.0-ee-RC3 from 1.10.0, use: $0 1.10.0 RC3"
+  echo "Usage: $0 <community version>"
+  echo "Example: To tag community version 1.10.0 as ci, use: $0 1.10.0"
   exit 1
 }
 
@@ -19,18 +18,15 @@ if [ $# -lt 1 ]; then
 fi
 
 C_REL=$1
-EE_SUFFIX="-ee"
-if [ ! -z $2 ]; then 
-  EE_SUFFIX="-ee-${2}"
-fi
+CI_TAG="ci"
 
 IMGLIST=$(cat openebs-release-tag-images.txt |tr "\n" " ")
 
 for IMG in $IMGLIST
 do
   docker pull ${COMMUNITY_REG}${IMG}:${C_REL}
-  docker tag ${COMMUNITY_REG}${IMG}:${C_REL} ${ENTERPRISE_REG}${IMG}:${C_REL}${EE_SUFFIX}
-  docker push ${ENTERPRISE_REG}${IMG}:${C_REL}${EE_SUFFIX}
+  docker tag ${COMMUNITY_REG}${IMG}:${C_REL} ${ENTERPRISE_REG}${IMG}:${CI_TAG}
+  docker push ${ENTERPRISE_REG}${IMG}:${CI_TAG}
 done
 
 #Images that do not follow the openebs release version
@@ -39,6 +35,7 @@ TIMGLIST=$(cat openebs-custom-tag-images.txt |tr "\n" " ")
 for TIMG in $TIMGLIST
 do
   docker pull ${COMMUNITY_REG}${TIMG}
-  docker tag ${COMMUNITY_REG}${TIMG} ${ENTERPRISE_REG}${TIMG}${EE_SUFFIX}
-  docker push ${ENTERPRISE_REG}${TIMG}
+  IMG=$(echo $TIMG | cut -d ':' -f1)
+  docker tag ${COMMUNITY_REG}${TIMG} ${ENTERPRISE_REG}${IMG}:${CI_TAG}
+  docker push ${ENTERPRISE_REG}${IMG}:${CI_TAG}
 done
