@@ -1,5 +1,9 @@
 This document outlines the process of creating enterprise release or enterprise release candidate containers.
 
+Prior to running this steps outlined here, follow:
+- [Setup Enterprise Release branches](./setup-enterprise-branches.md)
+- [Rebase Enterprise Release branches with upstream changes](./sync-with-upstream.md)
+
 ## Enterprise Release Candidate
 
 To push enterprise RC container images, (say 1.10.0-ee-RC4), you will need to do the following:
@@ -53,6 +57,7 @@ To push enterprise RC container images, (say 1.10.0-ee-RC4), you will need to do
   ./check-release-tag.sh 1.10.0-ee-RC4
   ```
 
+_Note: If this is the first time an image is pushed to mayadata docker registry, it will be created as a private repo. Please login and make it public._ 
   
 ## Enterprise Release 
 
