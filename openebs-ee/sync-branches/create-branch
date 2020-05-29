@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# This script helps to create a new enterprise branch
+# from the corresponding community branch
+
+usage()
+{
+	echo "Usage: $0 <repo> <community release branch>"
+	echo " Example: $0 maya v1.10.x"
+	exit 1
+}
+
+if [ $# -ne 2 ]; then
+	usage
+fi
+
+REPO=$1
+BRANCH=$2
+
+create_branch()
+{
+  REPODIR="repos/$1"
+  BRANCH=$2
+
+  echo "  ==> Create enterprise release branch $2 on mayadata-io/$1"
+  cd $REPODIR && \
+ git checkout ${BRANCH} && \
+ git branch ${BRANCH}-ee && \
+ git checkout ${BRANCH}-ee && \
+ git push --set-upstream origin ${BRANCH}-ee && \
+ cd ../..
+
+}
+
+create_branch ${REPO} ${BRANCH}
+

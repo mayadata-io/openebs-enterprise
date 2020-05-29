@@ -3,13 +3,14 @@
 # This script helps to sync (rebase) 
 # enterprise release branch with community 
 # release branch.
-# Prior to running this script sync-release-branch.sh
-# should be executed and confirmed that release
+#
+# Prior to running this script setup-enterprise-branches.sh
+# should be executed and confirm that release
 # branches are available.
 
 usage()
 {
-	echo "Usage: $0 <release branch>"
+	echo "Usage: $0 <community release branch>"
 	exit 1
 }
 
@@ -19,20 +20,14 @@ fi
 
 REL_BRANCH=$1
 
+sync_upstream_branch()
+{
+  ./sync-upstream-branch $1 $2
+}
 
 rebase_rel_branch()
 {
-  REPODIR="repos/$1"
-  BRANCH=$2
-
-  echo "Rebase $2-ee from $2 for repo $1"
-
-  cd $REPODIR && \
- git checkout ${BRANCH}-ee && \
- git rebase -i ${BRANCH} && \
- git status && \
- git push && \
- cd ../..
+  ./rebase-forked-repo-branch $1 $2
 }
 
 REPO_LIST=$(cat openebs-repos.txt |tr "\n" " ")
@@ -42,6 +37,8 @@ do
   if [[ $REPO =~ ^# ]]; then
     echo "Skipping $REPO"
   else
+    sync_upstream_branch ${REPO} master
+    sync_upstream_branch ${REPO} ${REL_BRANCH}
     rebase_rel_branch ${REPO} ${REL_BRANCH}
   fi
 done
@@ -58,9 +55,17 @@ do
   else
     if [ "$ALPHABRANCH" == "master" ] ; then
       echo "Skipping $ALPHAREPO which has only master branch"
+      sync_upstream_branch ${ALPHAREPO} master
     else
+      sync_upstream_branch ${ALPHAREPO} master
+      sync_upstream_branch ${ALPHAREPO} ${ALPHABRANCH}
       rebase_rel_branch ${ALPHAREPO} ${ALPHABRANCH}
     fi
   fi
 done
 
+#The following repositories master branch is
+#unconventional
+sync_upstream_branch cstor develop
+sync_upstream_branch istgt replication
+sync_upstream_branch external-storage release
