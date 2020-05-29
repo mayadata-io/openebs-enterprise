@@ -1,0 +1,15 @@
+cstor-pool
+cstor-istgt
+m-apiserver
+cstor-pool-mgmt
+cstor-volume-mgmt
+m-exporter
+m-upgrade
+cspc-operator
+cvc-operator
+cspi-mgmt
+admission-server
+provisioner-localpv
+velero-plugin
+jiva-csi
+jiva-operator-linux_amd64

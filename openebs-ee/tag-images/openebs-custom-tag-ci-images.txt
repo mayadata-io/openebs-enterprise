@@ -1,0 +1,14 @@
+jiva:1.10.x-ci
+openebs-k8s-provisioner:1.10.x-ci
+snapshot-controller:1.10.x-ci
+snapshot-provisioner:1.10.x-ci
+cstor-csi-driver:1.10.x-ci
+cvc-operator-amd64:1.10.x-ci
+cspc-operator-amd64:1.10.x-ci
+cstor-volume-manager-amd64:1.10.x-ci
+cstor-pool-manager-amd64:1.10.x-ci
+cstor-webhook-amd64:1.10.x-ci
+zfs-driver:0.7.x-ci
+node-disk-manager-amd64:v0.5.x-ci
+node-disk-operator-amd64:v0.5.x-ci
+node-disk-exporter-amd64:v0.5.x-ci
