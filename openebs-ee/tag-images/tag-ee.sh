@@ -1,10 +1,9 @@
 #!/bin/sh
 
-# Get the community images and push them to 
+# For the repos that do not have enterprises builds
+# get the community image and push them to 
 # enterprise container image registry
 
-COMMUNITY_REG="quay.io/openebs/"
-ENTERPRISE_REG="mayadataio/"
 
 usage()
 {
@@ -24,21 +23,29 @@ if [ ! -z $2 ]; then
   EE_SUFFIX="-ee-${2}"
 fi
 
-IMGLIST=$(cat openebs-release-tag-images.txt |tr "\n" " ")
+COMMUNITY_REG="openebs/"
+ENTERPRISE_REG="mayadataio/"
 
-for IMG in $IMGLIST
-do
+tag_std_rel_image()
+{
+  IMG=$1
   docker pull ${COMMUNITY_REG}${IMG}:${C_REL}
   docker tag ${COMMUNITY_REG}${IMG}:${C_REL} ${ENTERPRISE_REG}${IMG}:${C_REL}${EE_SUFFIX}
   docker push ${ENTERPRISE_REG}${IMG}:${C_REL}${EE_SUFFIX}
-done
+}
 
-#Images that do not follow the openebs release version
-TIMGLIST=$(cat openebs-custom-tag-images.txt |tr "\n" " ")
-
-for TIMG in $TIMGLIST
-do
+tag_custom_rel_image()
+{
+  TIMG=$1
   docker pull ${COMMUNITY_REG}${TIMG}
   docker tag ${COMMUNITY_REG}${TIMG} ${ENTERPRISE_REG}${TIMG}${EE_SUFFIX}
-  docker push ${ENTERPRISE_REG}${TIMG}
-done
+  docker push ${ENTERPRISE_REG}${TIMG}${EE_SUFFIX}
+}
+
+tag_std_rel_image "jiva-csi"
+
+tag_custom_rel_image "monitor-pv:0.2.0"
+
+tag_custom_rel_image "mayastor:0.1.0"
+tag_custom_rel_image "mayastor-grpc:0.1.0"
+tag_custom_rel_image "moac:0.1.0"

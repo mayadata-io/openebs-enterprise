@@ -1,7 +1,6 @@
 linux-utils
 cstor-pool
 cstor-istgt
-jiva
 m-apiserver
 cstor-pool-mgmt
 cstor-volume-mgmt
@@ -12,12 +11,14 @@ cvc-operator
 cspi-mgmt
 admission-server
 provisioner-localpv
+velero-plugin
+jiva-csi
+jiva-operator-linux_amd64
+jiva
 openebs-k8s-provisioner
 snapshot-controller
 snapshot-provisioner
 cstor-csi-driver
-jiva-csi
-velero-plugin
 cvc-operator-amd64
 cspc-operator-amd64
 cstor-volume-manager-amd64
