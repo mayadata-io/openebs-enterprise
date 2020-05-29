@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # This script helps to sync (rebase) 
-# enterprise release branch with community 
-# release branch.
+# enterprise release branch with corresponding release branch.
 
 usage()
 {
@@ -23,7 +22,9 @@ rebase_to_ee_branch()
   REPODIR="repos/$1"
   RELBRANCH=$2
 
-  echo "Rebase $2-ee from $2 for repo $1"
+  echo 
+  echo "==============================="
+  echo "Rebase $1 branch $2-ee from branch $2"
 
   if [[ ! -d ${REPODIR} ]]; then
     echo "Error: $1 is not checked out"

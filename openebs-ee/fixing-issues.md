@@ -16,19 +16,17 @@ In some of the below steps, You will be prompted to enter your github user name 
 git clone https://github.com/mayadata-io/hacks
 cd hacks/openebs-ee/sync-branches
 
-# clone forked repo into local directory
-./setup-update-repo <repo-name>
-#./setup-update-repo jiva
+# Run this script that helps to merge(rebase) changes
+# from community OpenEBS repository to the corresponding
+# MayaData forked repository.
+#
+# After rebasing the master and community release branch, 
+# the changes from community release branch are rebased to 
+# corresponding enterprise release branch.
 
-# Pull latest changes and update forked repo
-./sync-upstream-branch <repo-name> <community-release-branch>
-./sync-upstream-branch <repo-name> master
-#./sync-upstream-branch jiva v1.10.x
-#./sync-upstream-branch jiva master
-
-# Rebase community release branch to enterprise release branch
-./rebase-forked-repo-branch <repo-name> <community-release-branch>
-#./rebase-forked-repo-branch jiva v1.10.x
+./sync-upstream-branch.sh <repo> <master-branch> <release-branch>
+# Example: ./sync-upstream-branch.sh jiva master v1.10.x
+# Example: ./sync-upstream-branch.sh cstor develop v1.10.x
 ```
 
 ## Create Fix branch

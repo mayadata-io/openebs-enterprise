@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# This script helps to setup or update 
-# OpenEBS repo that is forked into MayaData org.
+# This script helps to clone the MayaData forked repo
+# into local machine under directory named "repos". 
+# This script will also setup the upstream for the 
+# cloned repo to the corresponding OpenEBS repo.
 
 usage()
 {
@@ -14,38 +16,32 @@ if [ $# -ne 1 ]; then
 	usage
 fi
 
-REPO=$1
 mkdir -p repos
-
 
 setup_repo()
 {
   REPODIR="repos/$1"
+ 
+  rm -rf $REPODIR
 
-  if [[ -d $REPODIR ]]; then 
-    echo "Syncing $1"
-    cd $REPODIR && git pull && cd ../..
-  else 
-    REPOURL="https://github.com/mayadata-io/$1"
-    echo "Cloning $REPOURL into $REPODIR"
-    cd repos && git clone $REPOURL && cd ..
+  REPOURL="https://github.com/mayadata-io/$1"
+  echo 
+  echo "==============================="
+  echo "Cloning $REPOURL into $REPODIR"
+  cd repos && git clone $REPOURL && cd ..
 
-    if [ $(echo $PWD | rev | cut -d '/' -f1 | rev) == repos ]; then
-      echo "Error: $REPOURL doesn't exist."
-      exit 1
-    fi
+  if [ $(echo $PWD | rev | cut -d '/' -f1 | rev) == repos ]; then
+    echo "Error: $REPOURL doesn't exist."
+    exit 1
+  fi
 
-    cd $REPODIR && \
+  cd $REPODIR && \
  git remote add upstream https://github.com/openebs/$1 && \
  git remote set-url --push upstream no_push && \
  git remote -v && \
  cd ../..
 
-  fi 
 }
 
 setup_repo $1
 exit 0
-
-
-
