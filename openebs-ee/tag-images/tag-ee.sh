@@ -42,7 +42,8 @@ tag_custom_rel_image()
   docker push ${ENTERPRISE_REG}${TIMG}${EE_SUFFIX}
 }
 
-tag_std_rel_image "jiva-csi"
+#Due to flaky builds, sometimes a image can fail to get pushed
+#tag_std_rel_image "jiva-csi"
 
 tag_custom_rel_image "monitor-pv:0.2.0"
 

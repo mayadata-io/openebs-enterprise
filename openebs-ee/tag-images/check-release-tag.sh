@@ -31,26 +31,11 @@ check_tag()
   fi
 }
 
-parse_image()
-{
-  IMG=$(echo $1 | cut -d ':' -f1)
-  TAG=$(echo $1 | cut -d ':' -f2)
-
-  TAG_SUFFIX=$(echo $TAG | rev | cut -d '-' -f1 | rev)
-  TAG_PREFIX=$(echo $TAG | cut -d '-' -f1 )
-  if [ "$TAG_SUFFIX" == "$TAG_PREFIX" ]; then 
-    E_TAG="${TAG_PREFIX}-ee"
-  else
-    E_TAG="${TAG_PREFIX}-ee-${TAG_SUFFIX}"
-  fi
-  check_tag "${ENTERPRISE_REG}${IMG}:${E_TAG}"
-}
-
 IMGLIST=$(cat openebs-ent-release-tag-images.txt |tr "\n" " ")
 
 for IMG in $IMGLIST
 do
-  parse_image "${IMG}:${E_TAG}"
+  check_tag "${ENTERPRISE_REG}${IMG}:${E_TAG}"
 done
 
 #Images that do not follow the openebs release version
@@ -58,7 +43,7 @@ TIMGLIST=$(cat openebs-ent-custom-rel-tag-images.txt |tr "\n" " ")
 
 for TIMG in $TIMGLIST
 do
-  parse_image ${TIMG}
+  check_tag "${ENTERPRISE_REG}${TIMG}"
 done
 
 echo 
