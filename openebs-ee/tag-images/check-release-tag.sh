@@ -19,12 +19,14 @@ fi
 E_TAG=$1
 
 MISSING_REPOS=""
+FOUND_REPOS=""
 
 check_tag()
 {
   docker pull ${1}
   if [ $? -eq 0 ]; then
     echo "Found ${1}"
+    FOUND_REPOS="${1}\n${FOUND_REPOS}"
   else
     echo "Missing ${1}"
     MISSING_REPOS="${1}\n${MISSING_REPOS}"
@@ -53,4 +55,5 @@ if [ ! -z ${MISSING_REPOS} ]; then
   echo
 else
   echo "Success: Found tag $1 on all repos"
+  printf ${FOUND_REPOS}
 fi 

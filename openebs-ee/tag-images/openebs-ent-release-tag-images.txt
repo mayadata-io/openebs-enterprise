@@ -6,14 +6,11 @@ cstor-pool-mgmt
 cstor-volume-mgmt
 m-exporter
 m-upgrade
-cspc-operator
-cvc-operator
-cspi-mgmt
 admission-server
 provisioner-localpv
 velero-plugin
 jiva-csi
-jiva-operator-linux_amd64
+jiva-operator-amd64
 jiva
 openebs-k8s-provisioner
 snapshot-controller
