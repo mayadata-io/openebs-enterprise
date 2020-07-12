@@ -18,6 +18,7 @@ To push enterprise RC container images, (say 1.10.0-ee-RC4), you will need to do
             * maya
               * velero-plugin
               * cstor-operators
+		* cstor-csi
               * jiva-operator
                 * jiva-csi
 
@@ -26,7 +27,6 @@ To push enterprise RC container images, (say 1.10.0-ee-RC4), you will need to do
 - **Step 2** Some of the repositories don't follow release version or they are not yet added to the release pipeline. Trigger manual builds. This list includes:
   * node-disk-manager
   * zfs-localpv
-  * cstor-operators
   _Note that builds should be triggered from <release>-ee branch_
 
 - **Step 3** Some of the repositories don't have travis setup. For these, their community images are taken and tagged as enterprise containers. Run the following script. 
