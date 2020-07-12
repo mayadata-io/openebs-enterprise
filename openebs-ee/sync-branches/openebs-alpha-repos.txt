@@ -1,7 +1,5 @@
 linux-utils:master
-zfs-localpv:v0.7.x
-node-disk-manager:v0.5.x
+zfs-localpv:v0.8.x
+node-disk-manager:v0.6.x
 Mayastor:master
 monitor-pv:master
-
-

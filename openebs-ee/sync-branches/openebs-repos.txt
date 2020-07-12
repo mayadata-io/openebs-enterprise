@@ -5,6 +5,7 @@ velero-plugin
 cstor-csi
 cstor-operators
 api
+upgrade
 jiva
 jiva-operator
 jiva-csi

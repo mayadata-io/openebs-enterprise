@@ -17,6 +17,11 @@ fi
 REPO=$1
 BRANCH=$2
 
+setup_repo()
+{
+  ./setup-update-repo $1  
+}
+
 sync_upstream_branch()
 {
   REPODIR="repos/$1"
@@ -27,8 +32,7 @@ sync_upstream_branch()
   echo "Rebase $1 branch $2 with upstream."
 
   if [[ ! -d ${REPODIR} ]]; then
-    echo "Error: $1 is not checked out"
-    exit 1
+    setup_repo $1
   fi
 
   cd $REPODIR && \

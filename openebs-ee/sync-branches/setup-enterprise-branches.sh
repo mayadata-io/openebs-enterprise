@@ -32,6 +32,7 @@ fetch_rel_branch()
 
 create_ee_rel_branch()
 {
+  setup_repo ${1}
   ./create-branch ${1} ${2}
 }
 
