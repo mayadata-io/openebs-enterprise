@@ -4,7 +4,8 @@
 # get the community image and push them to 
 # enterprise container image registry
 
-
+set -x
+sudo docker login -u "${DNAME}" -p "${DPASS}";
 usage()
 {
   echo "Usage: $0 <community version> [<rc-tag>]"
