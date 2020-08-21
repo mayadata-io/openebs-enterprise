@@ -5,7 +5,7 @@ This document outlines the process for rebasing forked repo with upstream branch
 # Click on Ctrl-C => if you are not sure on pushing the contents. 
 
 git clone https://github.com/mayadata-io/hacks
-cd hacks/openebs-ee/sync-branches/
+cd openebs-enterprise/openebs-ee/sync-branches/
 
 # Edit openebs-alpha-repos.txt with the correct community release branch for the alpha repos. 
 

@@ -34,7 +34,7 @@ To push enterprise RC container images, (say 1.10.0-ee-RC4), you will need to do
   # Prior to running the script, set your Docker Login and Password as environment variables 
   # in your shell as DNAME and DPASS respectively.
   git clone https://github.com/mayadata-io/hacks
-  cd hacks/openebs-ee/tag-images
+  cd openebs-enterprise/openebs-ee/tag-images
 
   # Important! Edit tag-ee.sh with the correct community release tags for the custom images. 
 
@@ -50,7 +50,7 @@ To push enterprise RC container images, (say 1.10.0-ee-RC4), you will need to do
   ```
   # skip this step if you are already in tag-images directory
   git clone https://github.com/mayadata-io/hacks
-  cd hacks/openebs-ee/tag-images
+  cd openebs-enterprise/openebs-ee/tag-images
 
   # Important! Edit openebs-ent-custom-rel-tag-images.txt with the correct enterprise release tags
 
