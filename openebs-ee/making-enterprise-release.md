@@ -18,7 +18,7 @@ To push enterprise RC container images, (say 1.10.0-ee-RC4), you will need to do
             * maya
               * velero-plugin
               * cstor-operators
-		* cstor-csi
+                * cstor-csi
               * jiva-operator
                 * jiva-csi
 

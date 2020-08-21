@@ -52,5 +52,5 @@ tag_custom_rel_image "mayastor:0.2.0"
 tag_custom_rel_image "mayastor-grpc:0.2.0"
 tag_custom_rel_image "moac:0.2.0"
 
-tag_custom_rel_image "upgrade-amd64:1.11.1"
-tag_custom_rel_image "migrate-amd64:1.11.1"
+tag_custom_rel_image "upgrade-amd64:1.12.1"
+tag_custom_rel_image "migrate-amd64:1.12.1"
