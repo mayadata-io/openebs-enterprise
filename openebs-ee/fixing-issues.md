@@ -14,7 +14,7 @@ In some of the below steps, You will be prompted to enter your github user name 
 
 ```
 git clone https://github.com/mayadata-io/hacks
-cd hacks/openebs-ee/sync-branches
+cd openebs-enterprise/openebs-ee/sync-branches
 
 # Run this script that helps to merge(rebase) changes
 # from community OpenEBS repository to the corresponding

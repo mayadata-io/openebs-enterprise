@@ -4,7 +4,8 @@
 # get the community image and push them to 
 # enterprise container image registry
 
-
+set -x
+sudo docker login -u "${DNAME}" -p "${DPASS}";
 usage()
 {
   echo "Usage: $0 <community version> [<rc-tag>]"
@@ -51,5 +52,5 @@ tag_custom_rel_image "mayastor:0.2.0"
 tag_custom_rel_image "mayastor-grpc:0.2.0"
 tag_custom_rel_image "moac:0.2.0"
 
-tag_custom_rel_image "upgrade-amd64:1.11.1"
-tag_custom_rel_image "migrate-amd64:1.11.1"
+tag_custom_rel_image "upgrade-amd64:1.12.1"
+tag_custom_rel_image "migrate-amd64:1.12.1"
